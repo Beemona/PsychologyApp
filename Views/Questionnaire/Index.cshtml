@@ -1,0 +1,148 @@
+﻿@model List<PsychologyApp.Models.QuestionnaireQuestion>
+
+
+<form method="post" asp-action="Submit" id="quizForm">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="question-card" style="display:@(i == 0 ? "block" : "none")" data-index="@i">
+            <h3 class="question-text">@Model[i].Text</h3>
+
+            <ul class="answer-list">
+                @foreach (var answer in Model[i].Answers)
+                {
+                    <li class="answer-option">
+                        <label>
+                            <input type="radio" name="question_@Model[i].Id" value="@answer.Id" required />
+                            <span class="custom-radio"></span>
+                            @answer.Text
+                        </label>
+                    </li>
+                }
+            </ul>
+
+            <button type="button" class="next-btn" data-is-last="@(i == Model.Count - 1)">
+                @(i == Model.Count - 1 ? "Submit" : "Next")
+            </button>
+        </div>
+    }
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const questions = document.querySelectorAll('.question-card');
+        const nextButtons = document.querySelectorAll('.next-btn');
+        const quizForm = document.getElementById('quizForm');
+
+        nextButtons.forEach((btn, index) => {
+            btn.addEventListener('click', function () {
+                const currentQuestion = questions[index];
+                const selectedAnswer = currentQuestion.querySelector('input[type="radio"]:checked');
+
+                if (!selectedAnswer) {
+                    alert("Please select an answer before proceeding.");
+                    return;
+                }
+
+                if (btn.getAttribute('data-is-last') === 'True') {
+                    quizForm.submit();
+                } else {
+                    currentQuestion.style.display = 'none';
+                    questions[index + 1].style.display = 'block';
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        padding: 20px;
+    }
+
+    .quiz-title {
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #444;
+    }
+
+    .question-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .question-text {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+        color: #222;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .answer-list {
+        list-style-type: none;
+        padding: 20PX;
+    }
+
+    .answer-option {
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+    }
+
+        .answer-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .custom-radio {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        margin-top: 3px;
+        background-color: #ddd;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+
+    .answer-option input:checked ~ .custom-radio {
+        background-color: #A35C7A;
+    }
+
+    .answer-option label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1em;
+        color: #444;
+    }
+
+    .next-btn {
+        background-color: #C890A7 ;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 20px auto 0;
+    }
+
+        .next-btn:hover {
+            background-color: #A35C7A;
+        }
+</style>

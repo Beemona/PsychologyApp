@@ -1,0 +1,24 @@
+﻿@model PsychologyApp.Models.QuizResultViewModel
+
+<h2>Your Therapy Recommendation</h2>
+<p>@Model.Recommendation</p>
+
+<h3>Recommended Partners:</h3>
+<div id="partnerCards">Loading partners...</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const psychologyTypeId = '@Model.PsychologyTypeId';
+        const psychotherapyTypeId = '@Model.PsychotherapyTypeId';
+
+        console.log("PsychologyTypeId:", psychologyTypeId);
+        console.log("PsychotherapyTypeId:", psychotherapyTypeId);
+
+        fetch(`/Partner/GetPartners?psychologyTypeId=${psychologyTypeId}&psychotherapyTypeId=${psychotherapyTypeId}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('partnerCards').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading partners:', error));
+    });
+</script>
