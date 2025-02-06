@@ -40,6 +40,20 @@ namespace PsychologyApp.Controllers
 
             return PartialView("_PartnerCards", partners);
         }
+        public IActionResult Profile(int id)
+        {
+            var partner = _context.Partners
+                .Include(p => p.PsychologyType)
+                .Include(p => p.PsychotherapyType)
+                .FirstOrDefault(p => p.Id == id);
+
+            if (partner == null)
+            {
+                return NotFound();
+            }
+
+            return View(partner);
+        }
 
     }
 }

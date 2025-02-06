@@ -9,18 +9,22 @@
     {
         @foreach (var partner in Model)
         {
-            <div class="partner-card">
+            <div class="partner-card" onclick="window.location.href='@Url.Action("Profile", "Partner", new { id = partner.Id })'">
                 <div class="card-image">
                     <img src="@partner.PhotoUrl" alt="@partner.Name" class="partner-photo" />
                 </div>
                 <div class="card-content">
                     <h3>@partner.Name</h3>
-                    <p class="psychology"><strong>@(partner.PsychologyType?.Name ?? "N/A")</strong> </p>
-                    <p class="psychotherapy"><strong>@(partner.PsychotherapyType?.Name ?? "N/A")</strong> </p>
+                    <p class="info"><strong>Psychology Type:</strong> @(partner.PsychologyType?.Name ?? "N/A")</p>
+                    <p class="info"><strong>Psychotherapy Type:</strong> @(partner.PsychotherapyType?.Name ?? "N/A")</p>
                     <p class="tags">@partner.Tags</p>
+
+                    <!-- ✅ Button to View Profile -->
+                    <button class="view-profile-btn" onclick="event.stopPropagation(); window.location.href='@Url.Action("Profile", "Partner", new { id = partner.Id })'">View Profile</button>
                 </div>
             </div>
         }
+
     }
 </div>
 
@@ -32,17 +36,31 @@
         padding: 20px;
     }
 
+    .view-profile-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+        .view-profile-btn:hover {
+            background-color: #45a049;
+        }
+
     .partner-card {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: transform 0.3s ease;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
         .partner-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
 
     .card-image {
         width: 100%;
