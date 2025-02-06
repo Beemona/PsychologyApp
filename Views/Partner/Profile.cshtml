@@ -4,8 +4,8 @@
     <div class="profile-header">
         <img src="@Model.PhotoUrl" alt="@Model.Name" class="profile-photo" />
         <h1>@Model.Name</h1>
-        <p><strong>Psychology Type:</strong> @Model.PsychologyType?.Name ?? "N/A"</p>
-        <p><strong>Psychotherapy Type:</strong> @Model.PsychotherapyType?.Name ?? "N/A"</p>
+        <p><strong>@(Model.PsychologyType?.Name ?? "N/A")</strong> </p>
+        <p><strong>@(Model.PsychotherapyType?.Name ?? "N/A")</strong> </p>
     </div>
 
     <div class="profile-grid">

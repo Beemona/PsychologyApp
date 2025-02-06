@@ -54,6 +54,18 @@ namespace PsychologyApp.Controllers
 
             return View(partner);
         }
+        public async Task<IActionResult> AllPartners()
+        {
+            var partners = await _context.Partners
+                .Include(p => p.PsychologyType)
+                .Include(p => p.PsychotherapyType)
+                .ToListAsync();
 
+            // Pass available Psychology & Psychotherapy Types for filtering
+            ViewBag.PsychologyTypes = await _context.PsychologyTypes.ToListAsync();
+            ViewBag.PsychotherapyTypes = await _context.PsychotherapyTypes.ToListAsync();
+
+            return View(partners);
+        }
     }
 }
