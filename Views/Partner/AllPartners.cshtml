@@ -30,7 +30,13 @@
                 <img src="@partner.PhotoUrl" alt="@partner.Name" class="partner-photo" />
                 <h3>@partner.Name</h3>
                 <p><strong>@(partner.PsychologyType?.Name ?? "")</strong> </p>
-                <p><strong>@(partner.PsychotherapyType?.Name ?? "")</strong> </p>
+                <p>
+                    <strong>
+                        <a asp-controller="Psychotherapy" asp-action="Details" asp-route-id="@partner.PsychotherapyType?.Id" class="text-decoration-none text-dark">
+                            @(partner.PsychotherapyType?.Name ?? "N/A")
+                        </a>
+                    </strong>
+                </p>
                 <button onclick="window.location.href='@Url.Action("Profile", "Partner", new { id = partner.Id })'">View Profile</button>
             </div>
         }

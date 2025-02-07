@@ -18,7 +18,7 @@ namespace PsychologyApp.Controllers
         public DbSet<PsychologyType> PsychologyTypes { get; set; }       
         public DbSet<PsychotherapyType> PsychotherapyTypes { get; set; }
         public DbSet<Partner> Partners { get; set; }
-
+        public DbSet<MentalDisorder> MentalDisorders { get; set; }
     }
 
     public class QuestionnaireController : Controller

@@ -13,6 +13,7 @@ namespace PsychologyApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<PsychologyAppContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<PsychotherapyService>();
 
 
             var app = builder.Build();

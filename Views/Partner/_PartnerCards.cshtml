@@ -16,7 +16,13 @@
                 <div class="card-content">
                     <h3>@partner.Name</h3>
                     <p class="info"><strong>@(partner.PsychologyType?.Name ?? "N/A")</strong> </p>
-                    <p class="info"><strong>@(partner.PsychotherapyType?.Name ?? "N/A")</strong> </p>
+                    <p>
+                        <strong>
+                            <a asp-controller="Psychotherapy" asp-action="Details" asp-route-id="@partner.PsychotherapyType?.Id" class="text-decoration-none text-dark">
+                                @(partner.PsychotherapyType?.Name ?? "N/A")
+                            </a>
+                        </strong>
+                    </p>
                     <p class="tags">@partner.Tags</p>
 
                     <!-- ✅ Button to View Profile -->

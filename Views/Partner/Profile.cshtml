@@ -5,7 +5,14 @@
         <img src="@Model.PhotoUrl" alt="@Model.Name" class="profile-photo" />
         <h1>@Model.Name</h1>
         <p><strong>@(Model.PsychologyType?.Name ?? "N/A")</strong> </p>
-        <p><strong>@(Model.PsychotherapyType?.Name ?? "N/A")</strong> </p>
+        <p>
+            <strong>
+                <a asp-controller="Psychotherapy" asp-action="Details" asp-route-id="@Model.PsychotherapyType?.Id" class="text-decoration-none text-dark">
+                    @(Model.PsychotherapyType?.Name ?? "N/A")
+                </a>
+            </strong>
+        </p>
+
     </div>
 
     <div class="profile-grid">

@@ -1,0 +1,65 @@
+﻿@model List<PsychologyApp.Models.PsychotherapyType>
+
+@{
+    ViewData["Title"] = "Psychotherapy Types";
+}
+
+<h2 class="text-center my-4">Explore Psychotherapy Types</h2>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var type = Model[i];
+            var cardColors = new[] { "#71BBB2", "#FFD6A5", "#FDFFB6", "#CAFFBF", "#9BF6FF", "#A9B5DF", "#BDB2FF", "#FFC6FF" };
+            var backgroundColor = cardColors[i % cardColors.Length];
+
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0 rounded-4" style="background-color:@backgroundColor;">
+                    <img src="/images/therapy/@(type.Id).png"
+                         class="card-img-top"
+                         alt="Therapy Image"
+                         style="height:200px; object-fit:cover; border-radius: 1rem 1rem 0 0;">
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">@type.Name</h5>
+                        <p class="text-muted mb-1"><strong>Domain:</strong> @type.Domain</p>
+
+                        <div class="mt-auto">
+                            <a asp-controller="Psychotherapy" asp-action="Details" asp-route-id="@type.Id"
+                               class="btn btn-light w-100 rounded-3 fw-bold">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-title {
+        color: #343a40;
+    }
+
+    .btn-light {
+        background-color: #ffffff;
+        border: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .btn-light:hover {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+</style>

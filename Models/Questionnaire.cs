@@ -44,16 +44,4 @@ namespace PsychologyApp.Models
         public int? PsychotherapyTypeId { get; set; }
         public PsychotherapyType? PsychotherapyType { get; set; }
     }
-    public class PsychologyType
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class PsychotherapyType
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
 }
